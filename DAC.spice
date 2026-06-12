@@ -1,0 +1,137 @@
+** sch_path: /home/victor/Documentos/SideProject/AmpOp/DAC.sch
+.subckt DAC VSS VDD V_SW b6 b5 b4 b3 b2 b1 b0 C_SW b7 VIN VREF VOUT AmpOp_SW
+*.iopin VSS
+*.iopin VDD
+*.ipin V_SW
+*.ipin b6
+*.ipin b5
+*.ipin b4
+*.ipin b3
+*.ipin b2
+*.ipin b1
+*.ipin b0
+*.ipin C_SW
+*.ipin b7
+*.ipin VIN
+*.ipin VREF
+*.opin VOUT
+*.ipin AmpOp_SW
+XC1 net8 net1 sky130_fd_pr__cap_mim_m3_1 W=2 L=2 MF=1
+XC2 net8 net10 sky130_fd_pr__cap_mim_m3_1 W=2 L=2 MF=1
+XC3 net8 net11 sky130_fd_pr__cap_mim_m3_1 W=2 L=2 MF=2 m=2
+XC4 net8 net2 sky130_fd_pr__cap_mim_m3_1 W=2 L=2 MF=4 m=4
+XC5 net8 net3 sky130_fd_pr__cap_mim_m3_1 W=2 L=2 MF=8 m=8
+XC6 net8 net4 sky130_fd_pr__cap_mim_m3_1 W=2 L=2 MF=16 m=16
+XC7 net8 net5 sky130_fd_pr__cap_mim_m3_1 W=2 L=2 MF=32 m=32
+XC8 net8 net6 sky130_fd_pr__cap_mim_m3_1 W=2 L=2 MF=64 m=64
+x1 VDD net1 C_SW VSS net7 VSS SPDT
+x2 VDD net10 b0 VSS net7 VSS SPDT
+x3 VDD net11 b1 VSS net7 VSS SPDT
+x4 VDD net2 b2 VSS net7 VSS SPDT
+x5 VDD net3 b3 VSS net7 VSS SPDT
+x6 VDD net4 b4 VSS net7 VSS SPDT
+x7 VDD net5 b5 VSS net7 VSS SPDT
+x8 VDD net6 b6 VSS net7 VSS SPDT
+x9 VDD net7 V_SW VREF VIN VSS SPDT
+x10 VDD net9 b7 VSS net7 VSS SPDT
+XC9 net8 net9 sky130_fd_pr__cap_mim_m3_1 W=2 L=2 MF=128 m=128
+x11 VDD net12 net8 VOUT VSS comparator
+x12 VDD VOUT AmpOp_SW net8 VSS TG
+XM1 net12 net12 VDD VDD sky130_fd_pr__pfet_01v8 L=2 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+XM2 VSS VSS net12 VDD sky130_fd_pr__pfet_01v8 L=2 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+XM3 VSS net12 VSS VSS sky130_fd_pr__nfet_01v8 L=10 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=5 m=5
+.ends
+
+* expanding   symbol:  SPDT.sym # of pins=6
+** sym_path: /home/victor/Documentos/SideProject/AmpOp/SPDT.sym
+** sch_path: /home/victor/Documentos/SideProject/AmpOp/SPDT.sch
+.subckt SPDT VDD COM SEL V1 V2 GND
+*.ipin SEL
+*.iopin VDD
+*.iopin GND
+*.ipin V2
+*.ipin V1
+*.opin COM
+XM1 COM SEL V2 GND sky130_fd_pr__nfet_01v8 L=0.15 W=4 nf=1 ad=1.16 as=1.16 pd=8.58 ps=8.58 nrd=0.0725 nrs=0.0725 sa=0 sb=0 sd=0
++ mult=1
+XM2 net1 SEL GND GND sky130_fd_pr__nfet_01v8 L=0.15 W=4 nf=1 ad=1.16 as=1.16 pd=8.58 ps=8.58 nrd=0.0725 nrs=0.0725 sa=0 sb=0 sd=0
++ mult=1
+XM3 V2 net1 COM VDD sky130_fd_pr__pfet_01v8 L=0.15 W=4 nf=1 ad=1.16 as=1.16 pd=8.58 ps=8.58 nrd=0.0725 nrs=0.0725 sa=0 sb=0 sd=0
++ mult=1
+XM4 net1 SEL VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=4 nf=1 ad=1.16 as=1.16 pd=8.58 ps=8.58 nrd=0.0725 nrs=0.0725 sa=0 sb=0 sd=0
++ mult=1
+XM5 COM net1 V1 GND sky130_fd_pr__nfet_01v8 L=0.15 W=4 nf=1 ad=1.16 as=1.16 pd=8.58 ps=8.58 nrd=0.0725 nrs=0.0725 sa=0 sb=0 sd=0
++ mult=1
+XM6 V1 SEL COM VDD sky130_fd_pr__pfet_01v8 L=0.15 W=4 nf=1 ad=1.16 as=1.16 pd=8.58 ps=8.58 nrd=0.0725 nrs=0.0725 sa=0 sb=0 sd=0
++ mult=1
+.ends
+
+
+* expanding   symbol:  comparator.sym # of pins=5
+** sym_path: /home/victor/Documentos/SideProject/AmpOp/comparator.sym
+** sch_path: /home/victor/Documentos/SideProject/AmpOp/comparator.sch
+.subckt comparator VDD VP VN VOUT VSS
+*.ipin VN
+*.ipin VP
+*.iopin VDD
+*.opin VOUT
+*.iopin VSS
+XM2 net1 net1 VDD VDD sky130_fd_pr__pfet_01v8 L=2 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+XM3 net2 net1 VDD VDD sky130_fd_pr__pfet_01v8 L=2 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+XM1 net1 VN net3 GND sky130_fd_pr__nfet_01v8 L=0.5 W=4 nf=1 ad=1.16 as=1.16 pd=8.58 ps=8.58 nrd=0.0725 nrs=0.0725 sa=0 sb=0 sd=0
++ mult=1
+XM4 net2 VP net3 GND sky130_fd_pr__nfet_01v8 L=0.5 W=4 nf=1 ad=1.16 as=1.16 pd=8.58 ps=8.58 nrd=0.0725 nrs=0.0725 sa=0 sb=0 sd=0
++ mult=1
+XM5 net3 net8 net4 GND sky130_fd_pr__nfet_01v8 L=2 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+XM6 net5 net5 VDD VDD sky130_fd_pr__pfet_01v8 L=1 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+XM7 net6 net5 VDD VDD sky130_fd_pr__pfet_01v8 L=1 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+XM8 net5 net5 VSS GND sky130_fd_pr__nfet_01v8 L=1 W=2 nf=1 ad=0.58 as=0.58 pd=4.58 ps=4.58 nrd=0.145 nrs=0.145 sa=0 sb=0 sd=0
++ mult=1
+XM9 net6 net5 net10 GND sky130_fd_pr__nfet_01v8 L=1 W=2 nf=1 ad=0.58 as=0.58 pd=4.58 ps=4.58 nrd=0.145 nrs=0.145 sa=0 sb=0 sd=0
++ mult=4 m=4
+XR1 VSS net10 VSS sky130_fd_pr__res_high_po W=1 L=21.5 mult=1
+XM12 net8 net8 net7 GND sky130_fd_pr__nfet_01v8 L=2 W=5 nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0
++ mult=1
+XM13 net7 net7 VSS GND sky130_fd_pr__nfet_01v8 L=2 W=5 nf=1 ad=1.45 as=1.45 pd=10.58 ps=10.58 nrd=0.058 nrs=0.058 sa=0 sb=0 sd=0
++ mult=1
+XM14 net8 net5 VDD VDD sky130_fd_pr__pfet_01v8 L=1 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+XM10 net4 net7 VSS GND sky130_fd_pr__nfet_01v8 L=2 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+XM11 VOUT net2 VDD VDD sky130_fd_pr__pfet_01v8 L=2 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+XM15 VOUT net8 net9 GND sky130_fd_pr__nfet_01v8 L=2 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+XM20 net9 net7 VSS GND sky130_fd_pr__nfet_01v8 L=2 W=10 nf=1 ad=2.9 as=2.9 pd=20.58 ps=20.58 nrd=0.029 nrs=0.029 sa=0 sb=0 sd=0
++ mult=1
+.ends
+
+
+* expanding   symbol:  TG.sym # of pins=5
+** sym_path: /home/victor/Documentos/SideProject/AmpOp/TG.sym
+** sch_path: /home/victor/Documentos/SideProject/AmpOp/TG.sch
+.subckt TG VDD COM SEL VIN GND
+*.ipin SEL
+*.iopin VDD
+*.iopin GND
+*.iopin COM
+*.iopin VIN
+XM1 COM SEL VIN GND sky130_fd_pr__nfet_01v8 L=0.15 W=0.5 nf=1 ad=0.145 as=0.145 pd=1.58 ps=1.58 nrd=0.58 nrs=0.58 sa=0 sb=0 sd=0
++ mult=1
+XM2 net1 SEL GND GND sky130_fd_pr__nfet_01v8 L=0.15 W=0.5 nf=1 ad=0.145 as=0.145 pd=1.58 ps=1.58 nrd=0.58 nrs=0.58 sa=0 sb=0 sd=0
++ mult=1
+XM3 VIN net1 COM VDD sky130_fd_pr__pfet_01v8 L=0.15 W=0.5 nf=1 ad=0.145 as=0.145 pd=1.58 ps=1.58 nrd=0.58 nrs=0.58 sa=0 sb=0 sd=0
++ mult=1
+XM4 net1 SEL VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=0.5 nf=1 ad=0.145 as=0.145 pd=1.58 ps=1.58 nrd=0.58 nrs=0.58 sa=0 sb=0 sd=0
++ mult=1
+.ends
+
+.end
